@@ -96,7 +96,7 @@ int main(void)
 				}
 			}
 
-				else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)  //para fechar o display ao apertar o X
+				else if (ev.type == ALLEGRO_EVENT_DISPLAY_CLOSE)  //para fechar o display ao apertar o X xxxxx
 			{
 				done = true;                            
 			}
@@ -107,7 +107,7 @@ int main(void)
 			pos_x += keys[RIGHT] * 10;
 
 
-			al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(200, 0, 055));  //desenho do SQUARE, posição e cor
+			al_draw_filled_rectangle(pos_x, pos_y, pos_x + 30, pos_y + 30, al_map_rgb(200, 0, 055));  //desenho do SQUARE, posição e cor VERM
 			al_flip_display();
 			al_clear_to_color(al_map_rgb(192, 192, 192));
 
