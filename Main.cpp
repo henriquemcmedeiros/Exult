@@ -3,10 +3,17 @@
 #include <time.h>
 #include <allegro5/allegro.h>				//incluindo bibliotecas
 #include <allegro5/allegro_ttf.h>
-#include <allegro5/allegro_font.h>
+#include <allegro5/allegro_font.h> 
 #include <allegro5/allegro_primitives.h>
+#include <allegro5/allegro_audio.h>
+#include <allegro5/allegro_acodec.h>
 
- 
+//__________________________________________
+//Variaveis globais
+
+ALLEGRO_SAMPLE* trilha_sonora = NULL;
+ALLEGRO_SAMPLE_INSTANCE* inst_trilha_sonora = NULL;  //instanciar evita conflitos e permite functions a mais
+
 enum KEYS { UP, DOWN, LEFT, RIGHT };
 
 int main(void)
@@ -32,21 +39,36 @@ int main(void)
 		if (!display)                                            //teste display
 			return -1;
 
+//-------------------------------------
+		//inicializacao de ADDONS e INSTALACOES
+
+		al_install_audio();
+		al_init_acodec_addon();
 		al_init_primitives_addon();
 		al_install_keyboard();
 
+		al_reserve_samples(15);  //"quantos audios vai ter no jogo"
+
+//-------------------------------------
+		//criacao de filas
 
 		event_queue = al_create_event_queue();
+
+		trilha_sonora = al_load_sample("trilha-oficial.wav"); //carrega qual arquivo vai tocar
+		inst_trilha_sonora = al_create_sample_instance(trilha_sonora); //instancia ela
+		al_attach_sample_instance_to_mixer(inst_trilha_sonora, al_get_default_mixer()); //faz com que ela fique num padrao ja definido poupando trabalho
+		al_set_sample_instance_playmode(inst_trilha_sonora, ALLEGRO_PLAYMODE_LOOP); //coloca a soundtrack em loop
+		al_set_sample_instance_gain(inst_trilha_sonora, 0.9); // VOLUME
 
 		al_register_event_source(event_queue, al_get_keyboard_event_source());
 		al_register_event_source(event_queue, al_get_display_event_source(display));
 
-
+		
 		while (!done)			
 		{
 			ALLEGRO_EVENT ev;									//evento das teclas para MOVIMENTAÇÃO
 			al_wait_for_event(event_queue, &ev);
-
+			al_play_sample_instance(inst_trilha_sonora);
 			if (ev.type == ALLEGRO_EVENT_KEY_DOWN)
 			{
 				switch (ev.keyboard.keycode)
@@ -115,9 +137,12 @@ int main(void)
 
 		}
 
+//----------------------------------------
+		//FINALIZACOES e DESTROYS
 
-
-		al_destroy_display(display);                            //destruindo display
+		al_destroy_sample(trilha_sonora);
+		al_destroy_sample_instance(inst_trilha_sonora);
+		al_destroy_display(display);                            
 
 		return 0;
 }
