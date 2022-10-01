@@ -103,7 +103,7 @@ int main(void)
 
 			pos_y -= keys[UP] * 10;
 			pos_y += keys[DOWN] * 10;
-			pos_x -= keys[LEFT] * 10;
+			pos_x -= keys[LEFT] * 10;  //o quanto o quadrado se move
 			pos_x += keys[RIGHT] * 10;
 
 

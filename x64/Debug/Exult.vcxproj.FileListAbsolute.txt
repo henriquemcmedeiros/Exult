@@ -1,2 +1,3 @@
 C:\Users\Pichau\source\repos\Exult\x64\Debug\Exult.exe
 C:\Users\Pichau\Source\Repos\henriquemcmedeiros\Exult\x64\Debug\Exult.exe
+C:\Users\Gustavo Pardini\Documents\GitHub\Exult\x64\Debug\Exult.exe
