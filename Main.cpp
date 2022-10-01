@@ -54,11 +54,11 @@ int main(void)
 
 		event_queue = al_create_event_queue();
 
-		trilha_sonora = al_load_sample("trilha-oficial.wav"); //carrega qual arquivo vai tocar
+		trilha_sonora = al_load_sample("trilha-sonora.wav"); //carrega qual arquivo vai tocar
 		inst_trilha_sonora = al_create_sample_instance(trilha_sonora); //instancia ela
 		al_attach_sample_instance_to_mixer(inst_trilha_sonora, al_get_default_mixer()); //faz com que ela fique num padrao ja definido poupando trabalho
 		al_set_sample_instance_playmode(inst_trilha_sonora, ALLEGRO_PLAYMODE_LOOP); //coloca a soundtrack em loop
-		al_set_sample_instance_gain(inst_trilha_sonora, 0.9); // VOLUME
+		al_set_sample_instance_gain(inst_trilha_sonora, 0.4); // VOLUME
 
 		al_register_event_source(event_queue, al_get_keyboard_event_source());
 		al_register_event_source(event_queue, al_get_display_event_source(display));
